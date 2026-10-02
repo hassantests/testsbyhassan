@@ -1,142 +1,81 @@
-# AI Compliance Tool
+This repo contains sample games built with <a href="https://github.com/AlmasB/FXGL">FXGL</a> Game Library.
+Each game focuses on one or two aspects of FXGL, e.g. Drop focuses on bare minimums, Pac-man focuses on AI, etc.
 
-An AI-powered compliance auditing platform that automates evidence management, compliance assessment against frameworks like ISO 27001 and NCA-ECC, and risk scoring.
+Checkout [this commit](https://github.com/AlmasB/FXGLGames/commit/a0821c76ba4a7a64dba4f9ec6f182827d909561c) for Java 8 code for all projects (FXGL 0.5.4).
+All projects will eventually be upgraded to Java 11 code (FXGL 11.0+).
 
-## Overview
-
-The AI Compliance Tool helps organizations:
-- **Upload and manage compliance evidence** (policies, screenshots, reports)
-- **Run AI-powered audits** against compliance frameworks
-- **Identify and score risks** from non-compliant controls
-- **Integrate with GitHub** for security posture audits
-
-## Architecture
-
-```
-ai-compliance-tool/
-├── server/          # FastAPI backend (Python)
-│   └── app/
-│       ├── api/      # REST API endpoints
-│       ├── core/     # Config, JWT, security
-│       ├── db/       # PostgreSQL + SQLAlchemy
-│       └── scripts/  # DB initialization
-├── ui/              # Next.js frontend (React + TypeScript)
-└── reports/         # Generated audit reports
-```
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Backend | FastAPI, Python 3.11+ |
-| Frontend | Next.js 16, React 19, Tailwind CSS 4 |
-| Database | PostgreSQL, SQLAlchemy |
-| Vector Store | Chroma |
-| AI/LLM | OpenAI GPT, LangChain |
-| Auth | JWT (python-jose), Argon2 |
-
-## Getting Started
-
-### Prerequisites
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
-- An [OpenAI API key](https://platform.openai.com/api-keys)
-- A GitHub App private key (for GitHub integration)
-
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone <repo-url>
-   cd ai-compliance-tool
-   ```
-
-2. **Configure environment variables**
-
-   Open `server/.env` and set your OpenAI API key:
-   ```env
-   OPENAI_API_KEY=sk-your-key-here
-   ```
-
-3. **Add GitHub App private key** (required for GitHub integration)
-
-   Place your GitHub App private key file in the server directory:
-   ```bash
-   cp /path/to/your/private-key.pem server/private-key.pem
-   ```
-   This file is mounted read-only into the Docker container. The `PRIVATE_KEY_PEM` path in `.env` is already configured to `./private-key.pem`.
-
-   > If you don't need GitHub integration, you can skip this step.
-
-4. **Start the application**
-   ```bash
-   docker compose up --build
-   ```
-
-   This will automatically:
-   - Start a PostgreSQL database
-   - Run database migrations and seed test data
-   - Start the FastAPI backend server
-   - Start the Next.js frontend
-
-5. **Access the application**
-
-   | Service | URL |
-   |---------|-----|
-   | Frontend | http://localhost:3000 |
-   | Backend API | http://localhost:8080 |
-   | API Docs (Swagger) | http://localhost:8080/docs |
-
-6. **Log in with test credentials**
-   - **Email:** `test@example.com`
-   - **Password:** `testpassword123`
-
-### Useful Commands
-
-| Command | Description |
-|---------|-------------|
-| `docker compose up --build` | Build and start all services |
-| `docker compose up` | Start services (without rebuilding) |
-| `docker compose down` | Stop all services |
-| `docker compose down -v` | Stop and **delete all data** (database, uploads) |
-| `docker compose logs server` | View server logs |
-| `docker compose logs ui` | View UI logs |
-
-### Development
-
-Code changes hot-reload automatically:
-- Edit files in `server/` — the backend restarts via uvicorn `--reload`
-- Edit files in `ui/src/` — the frontend rebuilds via Next.js Turbopack
-
-### Running Without Docker
-
-If you prefer to run services directly:
-
-**Server:**
+## Run
 ```bash
-cd server
-python -m venv .venv
-source .venv/bin/activate        # Linux/macOS
-# .venv\Scripts\activate         # Windows
-pip install -r requirements.txt
-python -m app.scripts.setup_db
-uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+cd PROJECT_NAME
+mvn javafx:run
 ```
 
-**UI:**
-```bash
-cd ui
-npm install
-npm run dev
+## Build for Mobile
+
+Follow latest instructions from [client-samples](https://github.com/gluonhq/client-samples#build-and-run-the-samples). A relevant extract is copied below.
+
+For example, to build Breakout for Android (can only build from Linux):
+
+1. Download [GraalVM](https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-20.2.0) zip: `graalvm-ce-java11-linux-amd64-20.2.0.tar.gz`
+
+2. Set `GRAALVM_HOME` and `JAVA_HOME` environment variables to the GraalVM installation directory. For example:
+
+```
+export GRAALVM_HOME=/opt/graalvm-ce-java11-20.2.0
+export JAVA_HOME=$GRAALVM_HOME
+```   
+
+3.
+
+```
+cd Breakout
+mvn clean client:build
+mvn client:package
+
+// connect your Android device and allow it installation over USB
+
+mvn client:install
 ```
 
-> Note: This requires PostgreSQL running locally. See `server/.env` for database connection settings.
+You can now run the game from Android, or you can run with logging from Linux: `mvn client:run`.
 
-## Contributing
+## Contribute
 
-1. Fetch latest from release branch
-2. Create feature branch: `git checkout -b feature/your-feature`
-3. Make changes and commit
-4. Push and open Pull Request to release branch
+These game demos are constantly upgraded, so feel free to fork and add something of your own.
 
-> **Do not push directly to `main` or `release/*` branches**
+## Projects by difficulty
+
+### Beginner
+
+* [Cannon](Cannon)
+* [Drop](Drop)
+* [Tower Defense](TowerDefense)
+* [Bomberman](Bomberman)
+* [OutRun](OutRun) (in Kotlin)
+* [Shooter](Shooter)
+* [Space Runner](SpaceRunner)
+
+### Intermediate
+
+* [GeoJumper](GeoJumper) (in Kotlin)
+* [Pong](Pong)
+* [Breakout](Breakout)
+* [TicTacToe](TicTacToe)
+* [Battle Tanks](BattleTanks)
+* [Flappy Bird](FlappyBird)
+* [Slot Machine](SlotMachine)
+
+### Advanced
+
+* [Space Invaders](SpaceInvaders)
+* [Geometry Wars](GeometryWars)
+* [Mario](Mario)
+* [Pac-man](Pacman)
+
+## Community
+
+You are very welcome to contribute to any of these games, or link to your own games.
+List of community developed games / demos: (Please add links below)
+
+* [FXGL based Idle Game](https://github.com/softknk/softknk.io) by Daniel Künkel.
+* [Greedy Snake Game](https://github.com/wuzirui/SnakeDungeon) by wuzirui
