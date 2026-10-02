@@ -1,0 +1,51 @@
+Information Security Policy
+---------------------------
+Acme Corporation strives to keep its systems secure. This policy is intended to promote awareness of security practices.
+
+Access Control Policy
+---------------------
+Users are provided access based on requests from their team leads.
+User access is sometimes reviewed.
+Passwords should be secure.
+MFA is optional but encouraged for remote access.
+
+Asset Management Policy
+-----------------------
+Assets are sometimes tracked.
+Confidential information must be handled properly.
+
+Cryptography Policy
+-------------------
+Encryption should be used wherever possible.
+TLS is recommended for web traffic.
+
+Backup and Recovery Policy
+--------------------------
+Systems are backed up periodically.
+Backups are stored safely.
+
+Incident Management Policy
+--------------------------
+Serious security issues must be reported to IT.
+Post-incident reviews may be conducted for certain incidents.
+
+Physical Security Policy
+------------------------
+Visitors are allowed into restricted areas if accompanied.
+Some access is logged.
+CCTV may be in place in some areas.
+
+Supplier Management Policy
+--------------------------
+Vendor contracts are signed.
+Security is expected from all vendors.
+
+Change Management Policy
+------------------------
+Changes should be tested before going live.
+Emergency changes are handled quickly.
+
+Compliance Policy
+-----------------
+We intend to align with ISO/IEC 27001.
+Audits may be conducted from time to time.
