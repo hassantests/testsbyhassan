@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "deepnotch-test-server": {
+      "command": "python",
+      "args": [
+        "tools/test_mcp_server.py"
+      ],
+      "env": {
+        "TEST_MODE": "true"
+      }
+    }
+  }
+}
